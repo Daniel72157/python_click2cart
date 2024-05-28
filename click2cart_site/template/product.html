@@ -1,0 +1,390 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Catalogo</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static '/images/icons/topicon.png' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/fonts/linearicons-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/slick/slick.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/MagnificPopup/magnific-popup.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static '/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body class="animsition">
+	
+	<!-- Header -->
+	<header class="header-v2">
+		<!-- Header desktop -->
+		<div class="container-menu-desktop trans-03">
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop p-l-45">
+					
+					<!-- Logo desktop -->		
+					<a href="#" class="logo">
+						<img src="{% static '/images/icons/click2cart_logo.png' %}" alt="IMG-LOGO">
+					</a>
+
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li class="active-menu">
+								<a href="back">Inicio</a>
+								
+							</li>
+
+							<li>
+								<a href="producto">Vender</a>
+							</li>
+
+							<li>
+								<a href="logout">Cerrar sesion</a>
+							</li>
+
+						</ul>
+					</div>	
+
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m h-full">
+
+						<div class="flex-c-m h-full p-l-18 p-r-25 bor5">
+							<a href="carrito" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+								Carrito
+							</a>
+						</div>
+							
+						<div class="flex-c-m h-full p-lr-19">
+							<a href="historial" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+								Historial
+							</a>
+						</div>
+					</div>
+				</nav>
+			</div>	
+		</div>
+	</header>
+
+	<!-- Cart -->
+
+	
+	<!-- Product -->
+	<div class="bg0 m-t-23 p-b-140">
+		<div class="container">
+			<div class="flex-w flex-sb-m p-b-52">
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+						Catálogo
+					</button>
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Ropa">
+						Ropa
+					</button>
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Deporte">
+						Deportes
+					</button>
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Electrodomesticos">
+						Electrodomésticos
+					</button>
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Juguetes">
+						Juguetes
+					</button>
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Tecnologia">
+						Tecnología
+					</button>
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Vehiculos">
+						Vehículos
+					</button>
+				</div>
+			</div>
+			<div class="row isotope-grid" style="width: 800px; height: 800px;">
+				{% for producto in productos %}
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ producto.clase }}">
+						<div class="block2">
+							<div class="block2-pic hov-img0" style="width: 150px; height: 150px;">
+								<img src="{{ producto.linkimage.url }}" alt="IMG-PRODUCT">
+								<button class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" onclick="updateProductDetails('{{ producto.nombre }}', '{{ producto.descripcion }}', '{{ producto.linkimage.url }}', '{{ producto.precio }}', '{{ producto.stock }}'), setinfo('{{ producto.nombre}}', '{{producto.id_producto}}')">
+									Detalles
+								</button>
+							</div>
+							<div class="block2-txt flex-w flex-t p-t-14">
+								<div class="block2-txt-child1 flex-col-l">
+									<a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										{{ producto.nombre }}
+									</a>
+									<span class="stext-105 cl3">
+										{{ producto.precio }}
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			</div>
+			</div>
+			
+			<!-- Back to top -->
+			<div class="btn-back-to-top" id="myBtn">
+				<span class="symbol-btn-back-to-top">
+					<i class="zmdi zmdi-chevron-up"></i>
+				</span>
+			</div>
+			
+			<!-- Modal1 -->
+			<script>
+				var info = {
+					nom: '',
+					id: ''
+				}
+				function setinfo(nombre, id){
+					info.nom = nombre;
+					info.id = id;
+				}
+				function updateProductDetails(nombre, descripcion, imagen, precio, stock) {
+					document.getElementById("product-name").innerText = nombre;
+					document.getElementById("product-price").innerText = "$"+precio;
+					document.getElementById("product-description").innerText = descripcion;
+					document.getElementById("product-image").src = imagen;
+					document.getElementById("product-stock").innerText = "Stock: "+stock;
+					document.getElementById("product-quantity").value = 1; // Reset quantity to 1
+				}
+			
+				function increaseQuantity() {
+					let quantityInput = document.getElementById("product-quantity");
+					quantityInput.value = parseInt(quantityInput.value) + 1;
+				}
+			
+				function decreaseQuantity() {
+					let quantityInput = document.getElementById("product-quantity");
+					if (quantityInput.value > 1) {
+						quantityInput.value = parseInt(quantityInput.value) - 1;
+					}
+				}
+			</script>
+			
+			<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+				<div class="overlay-modal1 js-hide-modal1"></div>
+			
+				<div class="container">
+					<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+						<button class="how-pos3 hov3 trans-04 js-hide-modal1">
+							<img src="{% static 'images/icons/icon-close.png' %}" alt="CLOSE">
+						</button>
+			
+						<div class="row">
+							<div class="col-md-6 col-lg-7 p-b-30">
+								<div class="p-l-25 p-r-30 p-lr-0-lg">
+									<div class="wrap-slick3 flex-sb flex-w">
+										<div class="wrap-slick3-dots"></div>
+										<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+			
+										<div class="wrap-pic-w pos-relative">
+											<img id="product-image" src="images/product-detail-01.jpg" alt="IMG-PRODUCT" style="width: 300px; height: 300px;">
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-md-6 col-lg-5 p-b-30">
+								<div class="p-r-50 p-t-5 p-lr-0-lg">
+									<h4 id="product-name" class="mtext-105 cl2 js-name-detail p-b-14">
+										Lightweight Jacket
+									</h4>
+			
+									<span id="product-price" class="mtext-106 cl2">
+										$58.79
+									</span>
+			
+									<p id="product-description" class="stext-102 cl3 p-t-23" style="line-height: 1.5; padding-bottom: 10px; word-wrap: break-word;">
+										Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+									</p>
+			
+									<span id="product-stock" class="mtext-106 cl2">
+										1
+									</span>
+			
+									<!-- Contador de cantidad -->
+									<div class="mtext-106 cl2 p-t-20">
+										Cantidad:
+										<div class="quantity-buttons" style="display: inline-flex; align-items: center;">
+											<button onclick="decreaseQuantity()" class="quantity-btn">-</button>
+											<input type="number" id="product-quantity" class="mtext-106 cl2" value="1" min="1" style="width: 60px; text-align: center; margin: 0 10px;">
+											<button onclick="increaseQuantity()" class="quantity-btn">+</button>
+										</div>
+									</div>
+			
+									<div class="botones p-t-20">
+										<button onclick="addToCart()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+											Añadir al carrito
+										</button>
+										<style>
+											.botones button {
+												display: inline-block;
+												margin-right: 10px; 
+											}
+											.quantity-buttons .quantity-btn {
+												background-color: #f7f7f7;
+												border: 1px solid #e6e6e6;
+												padding: 5px 10px;
+												cursor: pointer;
+											}
+										</style>
+									</div>
+								</div>
+							</div>	
+						</div>
+						
+						<!--  -->
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+			
+
+<!--===============================================================================================-->	
+	<script src="{% static '/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static '/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/select2/select2.min.js' %}"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static '/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/slick/slick.min.js' %}"></script>
+	<script src="{% static '/js/slick-custom.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/parallax100/parallax100.js' %}"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/isotope/isotope.pkgd.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/sweetalert/sweetalert.min.js' %}"></script>
+	<script>
+		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
+			e.preventDefault();
+		});
+
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function(){
+    		$(this).on('click', function(){
+				var cantidad = $('#product-quantity').val();
+        		$.ajax({
+            		type: "POST",
+            		url: "/agregarcarrito/",
+            		data: {
+						'idProducto': info.id,
+						'cantidad': cantidad
+					},
+            		headers: {
+                		'X-CSRFToken': '{{ csrf_token }}'
+            		},
+            		success: function(response) {
+                		swal(info.nom, "Fue agregado al carrito !", "success");
+            		},
+            		error: function(xhr, status, error) {
+                		swal("Error", "Error al intentar agregar los productos al carrito!", "error");
+            		}
+        		});
+    		});
+		});
+	
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static '/vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static '/js/main.js' %}"></script>
+
+</body>
+</html>
